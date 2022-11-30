@@ -7,8 +7,5 @@ public class LaunchGame extends GraphicsProgram {
 			this.setSize(500,600);
 			GLabel label = new GLabel("HI!");
 			add(label);
-			GLabel labe2 = new GLabel("HI!");
-			add(labe2);
-			add(labe2);
 	}
 }
