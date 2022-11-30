@@ -9,6 +9,6 @@ public class LaunchGame extends GraphicsProgram {
 			add(label);
 			GLabel labe2 = new GLabel("HI!");
 			add(labe2);
-			
+			add(labe2);
 	}
 }
