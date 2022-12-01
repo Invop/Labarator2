@@ -54,7 +54,7 @@ public class LaunchGame extends GraphicsProgram {
 /** Runs the Breakout program. */
 	public void run() {
 		/* You fill this in, along with any subsidiary methods */
-		this.setSize(500, 500);
+		this.setSize(500, 600);
 	}
 
 }
