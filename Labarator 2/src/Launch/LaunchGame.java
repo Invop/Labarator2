@@ -49,8 +49,6 @@ public class LaunchGame extends GraphicsProgram {
 /** Number of turns */
 	private static final int NTURNS = 3;
 
-	private static final int TURNS = 3;
-	private static final int NTURNS = 2;
 // HI
 /* Method: run() */
 /** Runs the Breakout program. */
