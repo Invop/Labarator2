@@ -6,5 +6,6 @@ public class LaunchGame extends Initial {
 		/* You fill this in, along with any subsidiary methods */
 		this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
 		tenRowsOfBricks();
+	
 	}
 }

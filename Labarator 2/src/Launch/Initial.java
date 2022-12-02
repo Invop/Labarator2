@@ -2,6 +2,7 @@ package Launch;
 
 import java.awt.Color;
 
+import acm.graphics.GOval;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
@@ -50,6 +51,7 @@ public class Initial extends GraphicsProgram{
 		 * @author Andrii
 		 * @param yCoordinateRow
 		 * @param xCoordinate
+		 * @return Метод зміщує прямокутники, створені методом createBrick
 		 */
 	   public void tenRowsOfBricks() {    
 	        double yCoordinateRow = BRICK_Y_OFFSET;
@@ -68,7 +70,7 @@ public class Initial extends GraphicsProgram{
 		 * @param xCoordinate
 		 * @param yCoordinateRow
 		 * @param NumLine
-		 * @
+		 * @return Метод малює прямокутники різного кольору
 		 */
 	   private void createBrick(double xCoordinate, double yCoordinateRow, int NumLine) {
 	        // create a brick
@@ -91,4 +93,17 @@ public class Initial extends GraphicsProgram{
 	        }
 	        add(brick);
 	    }
+
+	   /**
+		 * @author Andrii
+		 * @return GOval
+		 */
+	   //private GOval createBall() {
+	   public  void createBall() {
+		   GOval Ball = new GOval(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS, BALL_RADIUS*2, BALL_RADIUS*2);
+		   Ball.setFilled(true);
+		   Ball.setColor(Color.BLACK);
+	        add(Ball);    
+	        //return Ball;
+	   }
 }
