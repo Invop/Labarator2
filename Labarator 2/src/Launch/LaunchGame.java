@@ -4,8 +4,11 @@ public class LaunchGame extends Initial {
 /** Runs the Breakout program. */
 	public void run() {
 		/* You fill this in, along with any subsidiary methods */
-		this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
+		this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);	
+		//FirstBg();
+		//StartButtons();
+		//StartLabel();
+		SecondBg();
 		tenRowsOfBricks();
-	
 	}
 }
