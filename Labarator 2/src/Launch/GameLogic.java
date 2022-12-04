@@ -72,7 +72,6 @@ public class GameLogic extends Initial implements KeyListener {
 	   livesCounter();
 	   createPaddle();
 	   tenRowsOfBricks();
-
 	   //createBallAndMove();
    }
 	
@@ -114,12 +113,12 @@ public class GameLogic extends Initial implements KeyListener {
 	            	paddle.move(-10,0);
 	        }
 	}
-/*
-	public void createBallAndMove() {
+
+	/*public void createBallAndMove() {
 		createBall();
 		moveBall();
+		
 	}
-
 	private void moveBall() {
 		
 		RandomGenerator rgen = RandomGenerator.getInstance();
@@ -127,17 +126,39 @@ public class GameLogic extends Initial implements KeyListener {
         if (rgen.nextBoolean(0.5)) {
             vx = -vx;
         }
+        while(UserAttempts!=0) {
+            Ball.move(0, vy);
+            pause(8);
+            UserAttempts--;
+        }
+	}	
+	*/
+    /*
+     * private void displayQuantityLeft(int quantityOfBricksLeft) {
+     * bricksCounterLabel.setLabel("BRICKS TO WIN THIS GAME: " + quantityOfBricksLeft);
+		}
+	
+     */
+    	
 
-	}*/
-	
-	
-/*
- * private GObject getCollidingObject(GOval ball) {
-		// TODO Auto-generated method stub
-		return null;
-	}
- */
-	
-	 
+	/*private GObject getCollidingObject(GOval ball) {
+        // ball diameter
+        double ballDiameter = BALL_RADIUS * 2;
 
+        if (getElementAt(ball.getX(), ball.getY()) != null) {
+            return getElementAt(ball.getX(), ball.getY());
+        }
+        if (getElementAt(ball.getX() + ballDiameter, ball.getY()) != null) {
+            return getElementAt(ball.getX() + ballDiameter, ball.getY());
+        }
+        if (getElementAt(ball.getX(), ball.getY() + ballDiameter) != null) {
+            return getElementAt(ball.getX(), ball.getY() + ballDiameter);
+        }
+        if (getElementAt(ball.getX() + ballDiameter, ball.getY() + ballDiameter) != null) {
+            return getElementAt(ball.getX() + ballDiameter, ball.getY() + ballDiameter);
+        }
+        return null;
+    }
+    */
 }
+
