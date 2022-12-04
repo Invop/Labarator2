@@ -144,6 +144,7 @@ public class Initial extends GraphicsProgram{
 			button3.setFilled(true);
 			button3.setFillColor(Color.WHITE);
 			add(button3);
+			
 		}
 		
 		/**
