@@ -1,6 +1,7 @@
 package Launch;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
@@ -58,9 +59,9 @@ public class Initial extends GraphicsProgram{
 	public static final int font = 30;
 	
 /** Variable to select the difficulty of the game*/
-	private int GetDifficultyLevel;
+	public int GetDifficultyLevel=0;
 	
-		/**
+   		 /**
 		 * @author Andrii
 		 * @param yCoordinateRow
 		 * @param xCoordinate
@@ -78,6 +79,7 @@ public class Initial extends GraphicsProgram{
 	            yCoordinateRow = yCoordinateRow + BRICK_HEIGHT + BRICK_SEP;
 	        }
 	    }
+	   
 	   /**
 		 * @author Andrii
 		 * @param xCoordinate
@@ -87,21 +89,21 @@ public class Initial extends GraphicsProgram{
 		 */
 	   private void createBrick(double xCoordinate, double yCoordinateRow, int NumLine) {
 	        // create a brick
-	        GRect brick = new GRect(xCoordinate, yCoordinateRow, BRICK_WIDTH, BRICK_HEIGHT);
+	        brick = new GRect(xCoordinate, yCoordinateRow, BRICK_WIDTH, BRICK_HEIGHT);
 	        brick.setFilled(true);
 	        if (NumLine == 0 || NumLine == 1) {
 	        	brick.setColor(Color.RED);
 	        }
-	        if (NumLine == 2 || NumLine == 3) {
+	        else if (NumLine == 2 || NumLine == 3) {
 	        	brick.setColor(Color.ORANGE);
 	        }
-	        if (NumLine == 4 || NumLine == 5) {
+	        else if (NumLine == 4 || NumLine == 5) {
 	        	brick.setColor(Color.YELLOW);
 	        }
-	        if (NumLine== 6 || NumLine == 7) {
+	        else if (NumLine== 6 || NumLine == 7) {
 	        	brick.setColor(Color.GREEN);
 	        }
-	        if (NumLine == 8 || NumLine == 9) {
+	        else if (NumLine == 8 || NumLine == 9) {
 	        	brick.setColor(Color.CYAN);
 	        }
 	        add(brick);
@@ -111,13 +113,12 @@ public class Initial extends GraphicsProgram{
 		 * @author Andrii
 		 * @return GOval
 		 */
-	   //private GOval createBall() {
-	   public  void createBall() {
-		   GOval Ball = new GOval(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS, BALL_RADIUS*2, BALL_RADIUS*2);
+	   public void createBall() {
+	    
+		   Ball = new GOval(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS, BALL_RADIUS*2, BALL_RADIUS*2);
 		   Ball.setFilled(true);
-		   Ball.setColor(Color.BLACK);
-	        add(Ball);    
-	        //return Ball;
+		   Ball.setColor(Color.BLACK);   
+	       add(Ball);
 	   }
 	   
 	   /**
@@ -128,18 +129,18 @@ public class Initial extends GraphicsProgram{
 	    * @param getHeight
 	    * @return Метод створює три кнопки для вибору складності рівня
 	    */
-	public void StartButtons() {	
-			button1 = new GRect (getWidth()/2-BUTTON_WIDTH/2, getHeight()*0.75-2.5*BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
+	   public void StartButtons() {	
+			button1 = new GRect (WIDTH/2-BUTTON_WIDTH/2, HEIGHT*0.75-2.5*BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 			button1.setFilled(true);
 			button1.setFillColor(Color.WHITE);
 			add(button1);
 			
-			button2 = new GRect (getWidth()/2-BUTTON_WIDTH/2, getHeight()*0.75-BUTTON_HEIGHT/2, BUTTON_WIDTH, BUTTON_HEIGHT);
+			button2 = new GRect (WIDTH/2-BUTTON_WIDTH/2, HEIGHT*0.75-BUTTON_HEIGHT/2, BUTTON_WIDTH, BUTTON_HEIGHT);
 			button2.setFilled(true);
 			button2.setFillColor(Color.WHITE);
 			add(button2);
 				
-			button3 = new GRect (getWidth()/2-BUTTON_WIDTH/2, getHeight()*0.75+1.5*BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
+			button3 = new GRect (WIDTH/2-BUTTON_WIDTH/2, HEIGHT*0.75+1.5*BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 			button3.setFilled(true);
 			button3.setFillColor(Color.WHITE);
 			add(button3);
@@ -154,25 +155,26 @@ public class Initial extends GraphicsProgram{
 		 * @return Метод накладає назви рівнів на прямокутники зі StartButtons
 		 */
 		public void StartLabel() {
-			GLabel button1Label = new GLabel ("Eazy");
+			button1Label = new GLabel ("Eazy");
 			button1Label.setFont("Berlin Sans FB -"+font);
 			add(button1Label, getWidth()/2-button1Label.getWidth()/2, button1.getY()+BUTTON_HEIGHT-button1Label.getHeight()/2);
 			
-			GLabel button2Label = new GLabel ("Medium");
+			button2Label = new GLabel ("Medium");
 			button2Label.setFont("Berlin Sans FB -"+font);
 			add(button2Label, getWidth()/2-button2Label.getWidth()/2,  button2.getY()+BUTTON_HEIGHT-button2Label.getHeight()/2);
 		
-			GLabel button3Label = new GLabel ("Hard");
+			button3Label = new GLabel ("Hard");
 			button3Label.setFont("Berlin Sans FB -"+font);
 			add(button3Label, getWidth()/2-button3Label.getWidth()/2, button3.getY()+BUTTON_HEIGHT-button3Label.getHeight()/2);
 		
 		}	
+		
 		/**
 		 * @author Anna
 		 * @return Метод створює фон при старті гри
 		 */
 		public void FirstBg() {
-			GImage backgroundStart = new GImage ("backgroundStart.png");			
+			backgroundStart = new GImage ("backgroundStart.png");			
 			add(backgroundStart);}
 		
 		/**
@@ -199,10 +201,43 @@ public class Initial extends GraphicsProgram{
 			GImage backgroundLoser = new GImage ("backgroundLoser.png");			
 			add(backgroundLoser);}
 		
+		
+		/**
+		 * @author Andrii
+		 * створює платформу 
+		 */
+		public void createPaddle() {
+			paddle= new GRect(0,HEIGHT-PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
+			paddle.setFilled(true);
+	        paddle.setColor(Color.BLACK);
+	        add(paddle);
+		}
+		
+		/**Bg*/
+		public GImage backgroundStart;
+		/**Start Labels*/
+		public GLabel button1Label;
+		public GLabel button2Label;
+		public GLabel button3Label;
+		
 		/** three buttons to choose difficulty of the game*/
-		private GRect button1;
-		private GRect button2;
-		private GRect button3;
+		public GRect button1;
+		public GRect button2;
+		public GRect button3;
+		/**Ball*/
+		public GOval Ball;
+		/**Brick*/
+		public GRect brick;
+		/**Paddle*/
+		public GRect paddle;
+		/**Lives Counter*/
+		public GLabel livesCounterLabel;
+		/**Bricks Counter*/
+		public GLabel bricksCounterLabel;
+		
+		/**Acceleration*/
+		public double vx;
+		public double vy=2;
 	}
 
 
