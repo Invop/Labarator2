@@ -8,6 +8,7 @@ import acm.graphics.GLabel;
 import acm.graphics.GOval;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
+import acm.util.RandomGenerator;
 
 public class Initial extends GraphicsProgram{
 
@@ -108,18 +109,6 @@ public class Initial extends GraphicsProgram{
 	        }
 	        add(brick);
 	    }
-
-	   /**
-		 * @author Andrii
-		 * @return GOval
-		 */
-	   public void createBall() {
-	    
-		   Ball = new GOval(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS, BALL_RADIUS*2, BALL_RADIUS*2);
-		   Ball.setFilled(true);
-		   Ball.setColor(Color.BLACK);   
-	       add(Ball);
-	   }
 	   
 	   /**
 	    * @author Anna
@@ -202,18 +191,6 @@ public class Initial extends GraphicsProgram{
 			GImage backgroundLoser = new GImage ("backgroundLoser.png");			
 			add(backgroundLoser);}
 		
-		
-		/**
-		 * @author Andrii
-		 * створює платформу 
-		 */
-		public void createPaddle() {
-			paddle= new GRect(0,HEIGHT-PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
-			paddle.setFilled(true);
-	        paddle.setColor(Color.BLACK);
-	        add(paddle);
-		}
-		
 		/**Bg*/
 		public GImage backgroundStart;
 		/**Start Labels*/
@@ -235,7 +212,8 @@ public class Initial extends GraphicsProgram{
 		public GLabel livesCounterLabel;
 		/**Bricks Counter*/
 		public GLabel bricksCounterLabel;
-		
+		/**Random start angle*/
+		public RandomGenerator randomX;
 		/**Acceleration*/
 		public double vx;
 		public double vy=2;
