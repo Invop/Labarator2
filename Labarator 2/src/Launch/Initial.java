@@ -1,8 +1,6 @@
 package Launch;
 
 import java.awt.Color;
-import java.awt.event.MouseEvent;
-
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GOval;
@@ -11,7 +9,7 @@ import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
 
 public class Initial extends GraphicsProgram{
-
+	private static final long serialVersionUID = 1L;
 /** Width and height of application window in pixels */
 	public static final int APPLICATION_WIDTH = 500;
 	public static final int APPLICATION_HEIGHT = 700;
@@ -31,7 +29,7 @@ public class Initial extends GraphicsProgram{
 	public static final int NBRICKS_PER_ROW = 10;
 
 /** Number of rows of bricks */
-	public static final int NBRICK_ROWS = 10;
+	public static  int NBRICK_ROWS = 10;
 
 /** Separation between bricks */
 	public static final int BRICK_SEP = 4;
@@ -172,7 +170,7 @@ public class Initial extends GraphicsProgram{
 		 * @return Метод створює фон гри
 		 */
 		public void SecondBg() {
-			GImage backgroundGame = new GImage ("backgroundGame.png");			
+			backgroundGame = new GImage ("backgroundGame.png");			
 			add(backgroundGame);}
 		
 		/**
@@ -193,6 +191,7 @@ public class Initial extends GraphicsProgram{
 		
 		/**Bg*/
 		public GImage backgroundStart;
+		public GImage backgroundGame;
 		/**Start Labels*/
 		public GLabel button1Label;
 		public GLabel button2Label;
@@ -216,7 +215,7 @@ public class Initial extends GraphicsProgram{
 		public RandomGenerator randomX;
 		/**Acceleration*/
 		public double vx;
-		public double vy=2;
+		public double vy=3;
 	}
 
 
