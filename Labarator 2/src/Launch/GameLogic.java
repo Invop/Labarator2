@@ -14,6 +14,10 @@ import acm.util.RandomGenerator;
 public class GameLogic extends Initial implements KeyListener {
 	public int numOfBricksToWin;
 	public int UserAttemps=3;
+	
+	/** variables for speed */
+	private double vx;
+	private double vy = 5;
 	/**
 	 	* @author Andrii
 	 * @return Menu
@@ -130,12 +134,12 @@ public class GameLogic extends Initial implements KeyListener {
      	*  @author Andrii
      *  @return Ball
      */
-		private void createBall() {
+		public void createBall() {
         
         double ovalWidthHeight = BALL_RADIUS * 2;
         Ball = new GOval(getWidth() / 2 - BALL_RADIUS, getHeight() / 2 - BALL_RADIUS, ovalWidthHeight, ovalWidthHeight);
         Ball.setFilled(true);
-        Ball.setColor(Color.BLACK);
+        Ball.setColor(Color.WHITE);
         add(Ball);
     }
     /**
@@ -150,5 +154,33 @@ public class GameLogic extends Initial implements KeyListener {
         }
 
     }
+		
+		
+		/**
+		 * @author Anna
+		 * @param vx
+		 * @param vy
+		 * @param BALL_RADIUS
+		 * @return the direction of the ball when it hits
+		 */
+		public void moveBall() {	
+			
+	        Ball.move(vx, vy);		        
+	        if (Ball.getX() > getWidth()-BALL_RADIUS*2) 
+	        	vx = -vx;
+	        else if (Ball.getX() < 0) 
+	        	vx = -vx;
+	        else if (Ball.getY() < 0) 
+	        	vy = -vy;
+	        else if (Ball.getY() > getHeight()) 
+	        	vy = -vy;
+	        
+		}
+		
+		RandomGenerator rgen = RandomGenerator.getInstance();{
+	        vx = rgen.nextDouble(1.0, 3.0);
+	        if (rgen.nextBoolean(0.5)) 
+	            vx = -vx;}
+		
 
 }

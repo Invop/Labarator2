@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Labarator 2/src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/acm"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/acm"/>
+	<classpathentry exported="true" kind="lib" path="acm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
