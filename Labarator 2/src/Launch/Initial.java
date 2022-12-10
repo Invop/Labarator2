@@ -185,13 +185,32 @@ public class Initial extends GraphicsProgram{
 		 * @author Anna
 		 * @return Метод створює фон, якщо користувач програв
 		 */
-		public void ForthBg() {
+		public void FourthBg() {
 			GImage backgroundLoser = new GImage ("backgroundLoser.png");			
 			add(backgroundLoser);}
+		
+		/**
+		 * @author Anna
+		 * @return booster that makes ball move faster 
+		 */
+		public void doAcceleration() {
+			acceleration = new GImage ("ballFaster.png");
+			add(acceleration);
+		}
+		
+		/**
+		 * @author Anna
+		 * @return booster that makes ball move slowly
+		 */
+		public void doSlowdown() {
+			slowdown = new GImage ("ballSlowly.png");
+			add(slowdown);
+		}
 		
 		/**Bg*/
 		public GImage backgroundStart;
 		public GImage backgroundGame;
+		
 		/**Start Labels*/
 		public GLabel button1Label;
 		public GLabel button2Label;
@@ -215,7 +234,10 @@ public class Initial extends GraphicsProgram{
 		public RandomGenerator randomX;
 		/**Acceleration*/
 		public double vx;
-		public double vy=3;
+		public double vy=5;
+		/**booster faster and slowly*/
+		public GImage acceleration;
+		public GImage slowdown;
 	}
 
 

@@ -186,6 +186,8 @@ public class GameLogic extends Initial implements KeyListener {
 			Ball.move(vx, vy);	
 			GObject collider = getCollidingObj(Ball);
 			if (collider == paddle) {vy = -vy; }
+			if(collider == acceleration) {remove(acceleration); vy+=2; }
+			if (collider== slowdown) {remove(slowdown); vy-=0.8;}
 			else if (collider != null && collider != paddle && collider != bricksCounterLabel && collider != livesCounterLabel && collider!=backgroundGame) {                   
                 vy = -vy ;
                 remove(collider);
@@ -207,4 +209,35 @@ public class GameLogic extends Initial implements KeyListener {
 	        	}   
 			
 		}
+		
+		public void randomBuff() {
+			int randImprovement = rgen.nextInt(1,2);
+			if(numOfBricksToWin%10==0) {
+				
+				if (randImprovement == 1) {
+					//acceleration();
+					acceleration.move(0, vy);
+				}
+				else slowdown.move(0, vy);
+				
+			}
+		}
+		
+		/**
+		 * @author Anna
+		 * @param UserAttemps
+		 * @param numOfBricksToWin
+		 * @return background depending on the outcome of the game
+		 */
+		public void theEnd() {
+			removeAll();
+			if(UserAttemps == 0) {
+				FourthBg();
+			}
+			if(numOfBricksToWin == 0) {
+				ThirdBg();
+		}
+		}
+		/** random number generator */
+	    private RandomGenerator rgen= new RandomGenerator();
 }
