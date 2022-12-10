@@ -3,6 +3,7 @@ package Launch;
 import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
+import acm.graphics.GObject;
 import acm.graphics.GOval;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
@@ -203,8 +204,8 @@ public class Initial extends GraphicsProgram{
 		 * @return booster that makes ball move slowly
 		 */
 		public void doSlowdown() {
-			slowdown = new GImage ("ballSlowly.png");
-			add(slowdown, Ball.getX(), Ball.getY());
+			slowdown = new GImage ("ballSlowly.png",Ball.getX(), Ball.getY());
+			add(slowdown);
 		}
 		
 		/**Bg*/
@@ -238,6 +239,8 @@ public class Initial extends GraphicsProgram{
 		/**booster faster and slowly*/
 		public GImage acceleration;
 		public GImage slowdown;
+		/**Collection of items*/
+		public GObject colliderPaddle;
 	}
 
 

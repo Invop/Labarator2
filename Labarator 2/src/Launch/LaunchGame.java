@@ -12,11 +12,11 @@ public class LaunchGame extends GameLogic {
 		removeAll();
 		SetupLevel();
 		while(UserAttemps!=0 && numOfBricksToWin!=0) {
-			if(GetDifficultyLevel>=2) randomBuff();
 			moveBall();
-			pause(10);	
+			pause(10);
+			theEnd();	
 		}
-		theEnd();
+		
 	}
 	
 }

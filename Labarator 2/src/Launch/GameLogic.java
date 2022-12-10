@@ -123,14 +123,15 @@ public class GameLogic extends Initial implements KeyListener {
 		* @author Andrii
 		 * @return Move paddle
 		 */
-		public void keyPressed(KeyEvent paddleMove)  {
-		        if (paddleMove.getKeyCode() == KeyEvent.VK_RIGHT) {
-		            	paddle.move(25,0);
-		        }
-		        if (paddleMove.getKeyCode() == KeyEvent.VK_LEFT) {
-		            	paddle.move(-25,0);
-		        }
-		}
+	    public void mouseMoved(MouseEvent paddleMove) {
+	    	if(GetDifficultyLevel!=0) {
+	        double mouseCenterOfThePaddle = PADDLE_WIDTH / 2;
+	        double LimitX = getWidth() - mouseCenterOfThePaddle;
+	        double LimitX2 = mouseCenterOfThePaddle;
+	        if (paddleMove.getX() <= LimitX && paddleMove.getX() >= LimitX2) {
+	            paddle.setLocation(paddleMove.getX() - mouseCenterOfThePaddle, getHeight() - PADDLE_Y_OFFSET);
+	        }}
+	    }
 	   
 		/**
 	     *  @author Andrii
@@ -187,16 +188,27 @@ public class GameLogic extends Initial implements KeyListener {
 		 * @return the direction of the ball when it hits
 		 */
 		public void moveBall() {
+			
 			Ball.move(vx, vy);	
 			GObject collider = getCollidingObj(Ball);
+			
+			if(acceleration!=null) {
+			colliderPaddle = getElementAt(acceleration.getX(), acceleration.getY());
+			add(colliderPaddle);
+			acceleration.move(0, 2);if(paddle==colliderPaddle) {remove(acceleration); vy+=2; }}
+			else if(slowdown!=null) {
+			colliderPaddle = getElementAt(paddle.getX(), paddle.getY());
+			add(colliderPaddle);
+			slowdown.move(0, 3);if (paddle==colliderPaddle) {remove(slowdown); vy-=0.8;}}  
+			
 			if (collider == paddle) {vy = -vy; }
-			if(collider == acceleration) {remove(acceleration); vy+=2; }
-			if (collider== slowdown) {remove(slowdown); vy-=0.8;}
-			else if (collider != null && collider != paddle && collider != bricksCounterLabel && collider != livesCounterLabel && collider!=backgroundGame) {                   
+			
+			else if (collider != null && collider!=colliderPaddle && collider!=acceleration && collider!=slowdown && collider != paddle && collider != bricksCounterLabel && collider != livesCounterLabel && collider!=backgroundGame) {                   
                 vy = -vy ;
                 remove(collider);
                 numOfBricksToWin--;
                 UpdateBricksCounter();
+                if(GetDifficultyLevel>=2) randomBuff();
             }
 	        else if (Ball.getX() > getWidth()-BALL_RADIUS*2) 
 	        	{vx = -vx;}     
@@ -210,7 +222,9 @@ public class GameLogic extends Initial implements KeyListener {
 	        	remove(Ball);
 	        	createBall();
 	        	waitForClick();
-	        	}   
+	        	}
+			 
+			
 			
 		}
 		
@@ -223,15 +237,16 @@ public class GameLogic extends Initial implements KeyListener {
 		 */
 		public void randomBuff() {		
 			if(numOfBricksToWin%10==0) {
-				//рандом тре
-					acceleration.move(0, vy);				
+					rgen= RandomGenerator.getInstance();
+					int RandBuff=rgen.nextInt(0,1);
+					if (RandBuff==0) {
+							doAcceleration();
+						}
+					else if (RandBuff==1) {
+							doSlowdown();
+						}
 				}
-				else slowdown.move(0, vy);
-				
 			}
-		
-		
-		
 		
 		/**
 		 * @author Anna
@@ -240,12 +255,12 @@ public class GameLogic extends Initial implements KeyListener {
 		 * @return background depending on the outcome of the game
 		 */
 		public void theEnd() {
-			removeAll();
+			
 			if(UserAttemps == 0) {
-				FourthBg();
+				removeAll();FourthBg();
 			}
 			if(numOfBricksToWin == 0) {
-				ThirdBg();
+				removeAll();ThirdBg();
 		}
 		}
 		/** random number generator */
