@@ -11,6 +11,10 @@ import acm.graphics.GOval;
 import acm.graphics.GRect;
 import acm.util.RandomGenerator;
 
+/**
+ * @author Anna
+ *
+ */
 public class GameLogic extends Initial implements KeyListener {
 	private static final long serialVersionUID = 1L;
 	public int numOfBricksToWin;
@@ -210,18 +214,24 @@ public class GameLogic extends Initial implements KeyListener {
 			
 		}
 		
-		public void randomBuff() {
-			int randImprovement = rgen.nextInt(1,2);
+		/**
+		 * @author Anna
+		 * @param numOfBricksToWin
+		 * @param acceleration
+		 * @param slowdown
+		 * @return random buff and its movement
+		 */
+		public void randomBuff() {		
 			if(numOfBricksToWin%10==0) {
-				
-				if (randImprovement == 1) {
-					//acceleration();
-					acceleration.move(0, vy);
+				//рандом тре
+					acceleration.move(0, vy);				
 				}
 				else slowdown.move(0, vy);
 				
 			}
-		}
+		
+		
+		
 		
 		/**
 		 * @author Anna

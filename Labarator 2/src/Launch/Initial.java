@@ -195,7 +195,7 @@ public class Initial extends GraphicsProgram{
 		 */
 		public void doAcceleration() {
 			acceleration = new GImage ("ballFaster.png");
-			add(acceleration);
+			add(acceleration, Ball.getX(), Ball.getY());
 		}
 		
 		/**
@@ -204,7 +204,7 @@ public class Initial extends GraphicsProgram{
 		 */
 		public void doSlowdown() {
 			slowdown = new GImage ("ballSlowly.png");
-			add(slowdown);
+			add(slowdown, Ball.getX(), Ball.getY());
 		}
 		
 		/**Bg*/
