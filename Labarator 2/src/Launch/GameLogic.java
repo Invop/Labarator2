@@ -10,7 +10,7 @@ import acm.graphics.GOval;
 import acm.graphics.GRect;
 import acm.util.RandomGenerator;
 
-public class GameLogic extends Initial implements KeyListener {
+public class GameLogic extends Initial{
 	private static final long serialVersionUID = 1L;
 	/**Brick to win*/
 	public int numOfBricksToWin;
