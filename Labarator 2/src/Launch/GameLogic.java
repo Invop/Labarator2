@@ -192,28 +192,29 @@ public class GameLogic extends Initial implements KeyListener {
 			Ball.move(vx, vy);	
 			GObject collider = getCollidingObj(Ball);
 			
-			if (collider == paddle) {vy = -vy;}
+			if (collider == paddle) {Music.playMusic("wee-wee.wav");vy = -vy;}
 			
 			else if (collider != null && collider != paddle && collider != bricksCounterLabel && collider != livesCounterLabel && collider!=backgroundGame && collider!=colliderPaddle && collider!=acceleration && collider!=slowdown)  {                   
-                vy = -vy ;
+				Music.playMusic("wee-wee.wav");vy = -vy ;
                 remove(collider);
                 numOfBricksToWin--;
                 UpdateBricksCounter();
                 if(GetDifficultyLevel>=2) {randomBuff();}
             }
 	        else if (Ball.getX() > getWidth()-BALL_RADIUS*2) 
-	        	{vx = -vx;}     
+	        	{Music.playMusic("wee-wee.wav");vx = -vx;}     
 	        else if (Ball.getX() < 0) 
-	        	{vx = -vx;}	
+	        	{Music.playMusic("wee-wee.wav");vx = -vx;}	
 	        else if (Ball.getY() < 0) 
-	        	{vy = -vy;}  	
+	        	{Music.playMusic("wee-wee.wav");vy = -vy;}  	
 	        else if (Ball.getY() > getHeight()-BALL_RADIUS * 2) 
 	        	{UserAttemps--;
 	        	UpdateLivesCounter();
 	        	remove(Ball);
 	        	createBall();
 	        	if(UserAttemps!=0)waitForClick();
-	        	}	
+	        	}
+			
 		}
 		/**
 		 * @author Andrii
@@ -224,7 +225,8 @@ public class GameLogic extends Initial implements KeyListener {
 				acceleration.move(0,2);
 				if(paddle.contains(acceleration.getX(),acceleration.getY())) {	
 					if(vy>0) {vy+=0.3;}
-					else vy-=0.3;
+					else {vy-=0.3;}
+					Music.playMusic("bombaaa.wav");
 					remove(acceleration);
 					doRandomBuff=false;
 					
@@ -234,7 +236,8 @@ public class GameLogic extends Initial implements KeyListener {
 				slowdown.move(0,2);
 				if(paddle.contains(slowdown.getX(),slowdown.getY())) {	
 					if(vy>0)vy-=0.2;
-					else vy+=0.2;
+					else {vy+=0.2;}
+					Music.playMusic("bombaaa.wav");
 					remove(slowdown);
 					doRandomBuff=true;
 					
