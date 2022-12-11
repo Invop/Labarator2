@@ -43,7 +43,7 @@ public class GameLogic extends Initial implements KeyListener {
         livesCounter();
         createPaddle();
         createBall(); 
-
+        waitForClick();
 		}
 		
 	/**
@@ -192,23 +192,14 @@ public class GameLogic extends Initial implements KeyListener {
 			Ball.move(vx, vy);	
 			GObject collider = getCollidingObj(Ball);
 			
-			if(acceleration!=null) {
-			colliderPaddle = getElementAt(acceleration.getX(), acceleration.getY());
-			add(colliderPaddle);
-			acceleration.move(0, 2);if(paddle==colliderPaddle) {remove(acceleration); vy+=2; }}
-			else if(slowdown!=null) {
-			colliderPaddle = getElementAt(paddle.getX(), paddle.getY());
-			add(colliderPaddle);
-			slowdown.move(0, 3);if (paddle==colliderPaddle) {remove(slowdown); vy-=0.8;}}  
+			if (collider == paddle) {vy = -vy;}
 			
-			if (collider == paddle) {vy = -vy; }
-			
-			else if (collider != null && collider!=colliderPaddle && collider!=acceleration && collider!=slowdown && collider != paddle && collider != bricksCounterLabel && collider != livesCounterLabel && collider!=backgroundGame) {                   
+			else if (collider != null && collider != paddle && collider != bricksCounterLabel && collider != livesCounterLabel && collider!=backgroundGame && collider!=colliderPaddle && collider!=acceleration && collider!=slowdown)  {                   
                 vy = -vy ;
                 remove(collider);
                 numOfBricksToWin--;
                 UpdateBricksCounter();
-                if(GetDifficultyLevel>=2) randomBuff();
+                if(GetDifficultyLevel>=2) {randomBuff();}
             }
 	        else if (Ball.getX() > getWidth()-BALL_RADIUS*2) 
 	        	{vx = -vx;}     
@@ -221,13 +212,35 @@ public class GameLogic extends Initial implements KeyListener {
 	        	UpdateLivesCounter();
 	        	remove(Ball);
 	        	createBall();
-	        	waitForClick();
-	        	}
-			 
-			
-			
+	        	if(UserAttemps!=0)waitForClick();
+	        	}	
 		}
-		
+		/**
+		 * @author Andrii
+		 * @return move Buff
+		 */
+		public void MoveBuff() {
+			if(acceleration!=null) {
+				acceleration.move(0,2);
+				if(paddle.contains(acceleration.getX(),acceleration.getY())) {	
+					if(vy>0) {vy+=0.3;}
+					else vy-=0.3;
+					remove(acceleration);
+					doRandomBuff=false;
+					
+				}	
+			}
+			if (slowdown!=null) {
+				slowdown.move(0,2);
+				if(paddle.contains(slowdown.getX(),slowdown.getY())) {	
+					if(vy>0)vy-=0.2;
+					else vy+=0.2;
+					remove(slowdown);
+					doRandomBuff=true;
+					
+				}	
+			}
+		}
 		/**
 		 * @author Anna
 		 * @param numOfBricksToWin
@@ -236,15 +249,9 @@ public class GameLogic extends Initial implements KeyListener {
 		 * @return random buff and its movement
 		 */
 		public void randomBuff() {		
-			if(numOfBricksToWin%10==0) {
-					rgen= RandomGenerator.getInstance();
-					int RandBuff=rgen.nextInt(0,1);
-					if (RandBuff==0) {
-							doAcceleration();
-						}
-					else if (RandBuff==1) {
-							doSlowdown();
-						}
+			if(numOfBricksToWin%10==0 && numOfBricksToWin!=NBRICKS_PER_ROW*NBRICK_ROWS ) {					
+						if(doRandomBuff)doAcceleration();
+						else doSlowdown();
 				}
 			}
 		
@@ -264,5 +271,5 @@ public class GameLogic extends Initial implements KeyListener {
 		}
 		}
 		/** random number generator */
-	    private RandomGenerator rgen= new RandomGenerator();
+	   private boolean doRandomBuff=true;
 }

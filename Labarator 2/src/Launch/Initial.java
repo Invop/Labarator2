@@ -195,8 +195,8 @@ public class Initial extends GraphicsProgram{
 		 * @return booster that makes ball move faster 
 		 */
 		public void doAcceleration() {
-			acceleration = new GImage ("ballFaster.png");
-			add(acceleration, Ball.getX(), Ball.getY());
+			acceleration = new GImage ("ballFaster.png", Ball.getX(), Ball.getY());
+			add(acceleration);
 		}
 		
 		/**
@@ -238,6 +238,7 @@ public class Initial extends GraphicsProgram{
 		public double vy=5;
 		/**booster faster and slowly*/
 		public GImage acceleration;
+		/**booster faster and slowly*/
 		public GImage slowdown;
 		/**Collection of items*/
 		public GObject colliderPaddle;
