@@ -24,7 +24,7 @@ public class Initial extends GraphicsProgram{
 	public static final int PADDLE_HEIGHT = 10;
 
 /** Offset of the paddle up from the bottom */
-	public static final int PADDLE_Y_OFFSET = 30;
+	public static final int PADDLE_Y_OFFSET = 50;
 
 /** Number of bricks per row */
 	public static final int NBRICKS_PER_ROW = 10;
