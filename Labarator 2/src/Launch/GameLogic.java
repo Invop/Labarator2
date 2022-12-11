@@ -1,7 +1,6 @@
 package Launch;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
@@ -11,19 +10,17 @@ import acm.graphics.GOval;
 import acm.graphics.GRect;
 import acm.util.RandomGenerator;
 
-/**
- * @author Anna
- *
- */
 public class GameLogic extends Initial implements KeyListener {
 	private static final long serialVersionUID = 1L;
+	/**Brick to win*/
 	public int numOfBricksToWin;
+	/**User Attemps*/
 	public int UserAttemps=NTURNS;
 	
-	/**
+		/**
 	 	* @author Andrii
-	 * @return Menu
-	 */
+	 	* @return Menu
+	 	*/
 		public void SetupMenu() {
 		addMouseListeners();
 		FirstBg();
@@ -33,8 +30,8 @@ public class GameLogic extends Initial implements KeyListener {
 
 		/**
 		* @author Andrii
-		 * @return setup level 1
-		 */
+		* @return LEVEL
+		*/
 		public void SetupLevel() {
 		addKeyListeners();
         SecondBg();
@@ -46,10 +43,12 @@ public class GameLogic extends Initial implements KeyListener {
         waitForClick();
 		}
 		
-	/**
+		/**
 	 	* @author Andrii
-	 * @return lives counter
-	 */
+	 	* @param x
+	 	* @param y
+	 	* @return livesCounterLabel
+	 	*/
 		public void livesCounter() {
         livesCounterLabel = new GLabel("YOUR ATTEMPTS: " + UserAttemps);
         livesCounterLabel.setColor(Color.white);
@@ -64,7 +63,7 @@ public class GameLogic extends Initial implements KeyListener {
 		
 		/**
 	 	* @author Andrii
-	 	* @return update lives counter
+	 	* @return livesCounterLabel
 	 	*/
 		private void UpdateLivesCounter() {
 			livesCounterLabel.setLabel("YOUR ATTEMPTS: " + UserAttemps);
@@ -72,7 +71,7 @@ public class GameLogic extends Initial implements KeyListener {
 	
 		/**
 	 	* @author Andrii
-		 * @return brick counter
+		 * @return bricksCounterLabel
 		 */
 		private void bricksCounter() {
 		numOfBricksToWin=NBRICKS_PER_ROW * NBRICK_ROWS;
@@ -85,7 +84,7 @@ public class GameLogic extends Initial implements KeyListener {
 		
 		/**
 	 	* @author Andrii
-		 * @return update lives counter
+		 * @return bricksCounterLabel
 		 */
 		private void UpdateBricksCounter() {
 			bricksCounterLabel.setLabel("BRICKS TO WIN THIS GAME: " + numOfBricksToWin);
@@ -93,7 +92,7 @@ public class GameLogic extends Initial implements KeyListener {
 	
 		/**
 	 	* @author Andrii
-		 * @return створює платформу 
+		 * @return paddle
 		 */
 		public void createPaddle() {
 		paddle= new GRect(0,HEIGHT-PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -121,8 +120,12 @@ public class GameLogic extends Initial implements KeyListener {
 		
 		/**
 		* @author Andrii
-		 * @return Move paddle
-		 */
+		* @param GetDifficultyLevel
+		* @param LimitX
+		* @param LimitX2
+		* @param mouseCenterOfThePaddle
+		* @return Move paddle
+	 	*/
 	    public void mouseMoved(MouseEvent paddleMove) {
 	    	if(GetDifficultyLevel!=0) {
 	        double mouseCenterOfThePaddle = PADDLE_WIDTH / 2;
@@ -135,6 +138,9 @@ public class GameLogic extends Initial implements KeyListener {
 	   
 		/**
 	     *  @author Andrii
+	     *  @param ovalWidthHeight
+	     *  @param GOval
+	     *  @param BALL_RADIUS
 	     *  @return Ball
 	     */
 		public void createBall() {
@@ -148,7 +154,8 @@ public class GameLogic extends Initial implements KeyListener {
 	    
 		/**
 	     * @author Andrii
-	     * @return 1 рандомний мув кулі
+	     * @param vx
+	     * @return randomX
 	     */
 		private void RandomStartPosition() {
     	randomX = RandomGenerator.getInstance();
@@ -161,6 +168,8 @@ public class GameLogic extends Initial implements KeyListener {
 		
 		/**
 		 * @author Andrii
+		 * @return Ball collision
+		 * @param ballDiameter
 		 */
 		private GObject getCollidingObj(GOval ball) {
 			double ballDiameter = BALL_RADIUS * 2;
@@ -195,18 +204,30 @@ public class GameLogic extends Initial implements KeyListener {
 			if (collider == paddle) {Music.playMusic("wee-wee.wav");vy = -vy;}
 			
 			else if (collider != null && collider != paddle && collider != bricksCounterLabel && collider != livesCounterLabel && collider!=backgroundGame && collider!=colliderPaddle && collider!=acceleration && collider!=slowdown)  {                   
-				//Music.playMusic("hitting.wav");vy = -vy ;
+				Music.playMusic("hitting.wav");
+				Music.play();
+				Music.loop(0);
+				vy = -vy ;
                 remove(collider);
                 numOfBricksToWin--;
                 UpdateBricksCounter();
                 if(GetDifficultyLevel>=2) {randomBuff();}
             }
 	        else if (Ball.getX() > getWidth()-BALL_RADIUS*2) 
-	        	{Music.playMusic("wee-wee.wav");vx = -vx;}     
+	        	{Music.playMusic("wee-wee.wav");
+	        	Music.play();
+				Music.loop(0);
+	        	vx = -vx;}     
 	        else if (Ball.getX() < 0) 
-	        	{Music.playMusic("wee-wee.wav");vx = -vx;}	
+	        	{Music.playMusic("wee-wee.wav");
+	        	Music.play();
+				Music.loop(0);
+	        	vx = -vx;}	
 	        else if (Ball.getY() < 0) 
-	        	{Music.playMusic("wee-wee.wav");vy = -vy;}  	
+	        	{Music.playMusic("wee-wee.wav");
+	        	Music.play();
+				Music.loop(0);
+	        	vy = -vy;}  	
 	        else if (Ball.getY() > getHeight()-BALL_RADIUS * 2) 
 	        	{UserAttemps--;
 	        	UpdateLivesCounter();
@@ -218,7 +239,13 @@ public class GameLogic extends Initial implements KeyListener {
 		}
 		/**
 		 * @author Andrii
+		 * @param acceleration
+		 * @param slowdown
+		 * @param paddle
+		 * @param vy
+		 * @param doRandomBuff
 		 * @return move Buff
+		 * 
 		 */
 		public void MoveBuff() {
 			if(acceleration!=null) {
@@ -227,6 +254,8 @@ public class GameLogic extends Initial implements KeyListener {
 					if(vy>0) {vy+=0.3;}
 					else {vy-=0.3;}
 					Music.playMusic("bombaaa.wav");
+					Music.play();
+					Music.loop(0);
 					remove(acceleration);
 					doRandomBuff=false;
 					
@@ -238,6 +267,8 @@ public class GameLogic extends Initial implements KeyListener {
 					if(vy>0)vy-=0.2;
 					else {vy+=0.2;}
 					Music.playMusic("bombaaa.wav");
+					Music.play();
+					Music.loop(0);
 					remove(slowdown);
 					doRandomBuff=true;
 					
@@ -268,13 +299,17 @@ public class GameLogic extends Initial implements KeyListener {
 			
 			if(UserAttemps == 0) {
 				removeAll();FourthBg();
-				//Music.playMusic("sad.wav");
+				Music.playMusic("sad.wav");
+				Music.play();
+				Music.loop(0);
 			}
 			if(numOfBricksToWin == 0) {
 				removeAll();ThirdBg();
-				//Music.playMusic("happy.wav");
+				Music.playMusic("happy.wav");
+				Music.play();
+				Music.loop(0);
 		}
 		}
 		/** random number generator */
-	   private boolean doRandomBuff=true;
+	   protected boolean doRandomBuff=true;
 }

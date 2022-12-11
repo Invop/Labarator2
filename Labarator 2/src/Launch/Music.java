@@ -5,14 +5,14 @@ import java.io.IOException;
 import javax.sound.sampled.*;
 import javax.swing.JOptionPane;
 public class Music {
-	Clip clip;
-    AudioInputStream sound;
+	private static Clip clip;
+    private static AudioInputStream sound;
     public static void playMusic(String path) {
 		try {
 			AudioInputStream iputStream = AudioSystem.getAudioInputStream(new File(path));
-			Clip clip = AudioSystem.getClip();
+			clip = AudioSystem.getClip();
 			clip.open(iputStream);
-			clip.loop(0);
+
 			
 		}
 		catch(Exception e) {
@@ -20,10 +20,15 @@ public class Music {
 		}
 	}
     
-    public void play() {
+    public static void play() {
         clip.start();
+        
     }
-    public void stop() throws IOException {
+    public static void loop(int loop) {
+    	if(loop==1)clip.loop(Clip.LOOP_CONTINUOUSLY);
+    	else clip.loop(0);
+    }
+    public static void stop() throws IOException {
         sound.close();
         clip.close();
         clip.stop();

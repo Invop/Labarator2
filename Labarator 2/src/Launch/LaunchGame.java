@@ -5,6 +5,8 @@ public class LaunchGame extends GameLogic {
 	public void init() {
 		this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
 		Music.playMusic("BgSound.wav");
+		Music.play();
+		Music.loop(1);
 	}
 /* Method: run() */
 /** Runs the Breakout program. */
@@ -23,6 +25,8 @@ public class LaunchGame extends GameLogic {
 		removeAll();
 		GetDifficultyLevel=0;
 		UserAttemps=NTURNS;
+		doRandomBuff=true;
+		vy=5;
 		run();
 	}
 	
