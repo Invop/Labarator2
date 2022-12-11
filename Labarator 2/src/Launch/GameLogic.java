@@ -195,7 +195,7 @@ public class GameLogic extends Initial implements KeyListener {
 			if (collider == paddle) {Music.playMusic("wee-wee.wav");vy = -vy;}
 			
 			else if (collider != null && collider != paddle && collider != bricksCounterLabel && collider != livesCounterLabel && collider!=backgroundGame && collider!=colliderPaddle && collider!=acceleration && collider!=slowdown)  {                   
-				Music.playMusic("wee-wee.wav");vy = -vy ;
+				Music.playMusic("hitting.wav");vy = -vy ;
                 remove(collider);
                 numOfBricksToWin--;
                 UpdateBricksCounter();
@@ -268,9 +268,11 @@ public class GameLogic extends Initial implements KeyListener {
 			
 			if(UserAttemps == 0) {
 				removeAll();FourthBg();
+				Music.playMusic("sad.wav");
 			}
 			if(numOfBricksToWin == 0) {
 				removeAll();ThirdBg();
+				Music.playMusic("happy.wav");
 		}
 		}
 		/** random number generator */
