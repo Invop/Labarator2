@@ -88,7 +88,6 @@ public class Initial extends GraphicsProgram{
 		 * @return Метод малює прямокутники різного кольору
 		 */
 	   private void createBrick(double xCoordinate, double yCoordinateRow, int NumLine) {
-	        // create a brick
 	        brick = new GRect(xCoordinate, yCoordinateRow, BRICK_WIDTH, BRICK_HEIGHT);
 	        brick.setFilled(true);
 	        if (NumLine == 0 || NumLine == 1) {
